@@ -11,14 +11,14 @@ i=0
 k=0
 #read the csv and add the arr to a arrayn
 
-with open (conCsvFilePath) as csvFile:
+with open (conCsvFilePath, encoding='utf-8') as csvFile:
     csvReader = csv.DictReader(csvFile)
     for csvRow in csvReader:
         #arr.append(csvRow)
-        
+
         i=i+1
         print(csvRow['Name'])
-        with open (oppCsvFilePath) as OpportunityCsv, open (tasCsvFilePath) as taskCsv:
+        with open (oppCsvFilePath, encoding='utf-8') as OpportunityCsv, open (tasCsvFilePath, encoding='utf-8') as taskCsv:
             oppReader = csv.DictReader(OpportunityCsv)
             taskReader = csv.DictReader(taskCsv)
 
@@ -35,10 +35,10 @@ with open (conCsvFilePath) as csvFile:
                     if taskRow['PrimaryContact'] in csvRow['Name']:
                         print("Primary Contact is  " +taskRow['PrimaryContact'])
                         arr1.append(taskRow)
-            csvRow['tasks']=arr1                
+            csvRow['tasks']=arr1
             arr1=[]
 
         arr.append(csvRow)
 # write the data to a json file
-with open(jsonFilePath, "w") as jsonFile:
+with open(jsonFilePath, "w", encoding='utf-8') as jsonFile:
     jsonFile.write(json.dumps(arr, indent = 4))
